@@ -1,0 +1,6 @@
+framework module Pods_VDD_Network_Layers_Example {
+  umbrella header "Pods-VDD_Network_Layers_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
