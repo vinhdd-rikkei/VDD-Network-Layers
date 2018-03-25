@@ -12,10 +12,13 @@ import Alamofire
 class APIConstants {
     static var baseUrl: String {
         #if DEBUG
+            print("[ DEBUG ENVIROMENT ] API: ...\n")
             return ""
         #elseif STAGING
+            print("[ STAGING ENVIROMENT ] API: ...\n")
             return ""
         #else
+            print("[ APPSTORE ENVIROMENT ] API: ...\n")
             return ""
         #endif
     }

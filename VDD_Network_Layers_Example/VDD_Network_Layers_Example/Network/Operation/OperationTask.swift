@@ -10,14 +10,13 @@ import UIKit
 import Hydra
 import SwiftyJSON
 
-class OperationTask<T: ModelProtocol>: OperationProtocol {
+class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
     
     // MARK: - Variables
     typealias Output = T
-    var request: Request!
     
-    func set(request: Request) {
-        self.request = request
+    var request: Request! {
+        return self.request
     }
     
     init() { }

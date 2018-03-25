@@ -65,11 +65,12 @@ class NetworkDispatcher: DispatcherProtocol {
         case .url(let params):
             parameters = params
         }
-        print("[ REQUEST INFORMATION ] ==========================")
+        print("============= [ REQUEST INFORMATION ] =============")
         print(" - Full url: \(fullUrl)")
         print(" - Method: \(method)")
-        print(" - HTTP Headers: \(httpHeaders)")
-        print(" - Parameters: \(parameters ?? [:])")
+        print(" - HTTP Headers:\n   \(httpHeaders)")
+        print(" - Parameters:\n   \(parameters ?? [:])")
+        print("===================================================\n")
         return (fullUrl: fullUrl, method: method, httpHeaders: httpHeaders, parameters: parameters, encoding: encoding)
     }
     

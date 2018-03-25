@@ -13,6 +13,6 @@ protocol OperationProtocol {
     // Define Output type that should returns
     associatedtype Output
     
-    // Request for handling
-    func set(request: Request)
+    // Request
+    var request: Request! { get }
 }

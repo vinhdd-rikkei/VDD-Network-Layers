@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         LoginAPI(id: "bibi@gmail.com", password: "qwerty").execute().then { user in
-            user.printInformation()
+            user.user?.printInformation()
             }.catch { error in
                 print(error)
         }

@@ -52,6 +52,11 @@ public protocol Request {
     var dataType: DataType { get }
 }
 
+// Model repsonse protocol based on JSON data
+public protocol ModelResponseProtocol {
+    init(json: JSON)
+}
+
 // Define response data of requests
 public enum Response {
     case json(_: JSON)
