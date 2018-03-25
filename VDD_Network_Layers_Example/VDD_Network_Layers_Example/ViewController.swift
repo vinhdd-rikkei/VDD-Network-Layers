@@ -14,11 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        LoginAPI(id: "bibi@gmail.com", password: "qwerty").execute().then { user in
-            user.user?.printInformation()
-            }.catch { error in
-                print(error)
-        }
+        LoginAPI(id: "bibi@gmail.com", password: "qwerty").execute().then(in: .main, { response in
+            
+        }).catch(in: .main, { error in
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {

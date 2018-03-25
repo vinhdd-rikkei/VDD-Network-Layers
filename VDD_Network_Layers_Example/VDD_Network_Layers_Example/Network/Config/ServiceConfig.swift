@@ -19,7 +19,7 @@ public enum DataType {
 }
 
 // Define the type of HTTP method that used in requests
-// <Don't need enum code below any more because of Alamofire HTTP Method>
+// <Don't need enum code below any more because of Alamofire HTTP Method has been used>
 //public enum HTTPMethod: String {
 //    case post = "POST"
 //    case put = "PUT"

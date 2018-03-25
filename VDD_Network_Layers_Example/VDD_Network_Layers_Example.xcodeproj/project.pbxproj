@@ -25,6 +25,7 @@
 		955AF4402063B0E400A48904 /* OperationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4342063B0E400A48904 /* OperationProtocol.swift */; };
 		955AF4412063B0E400A48904 /* OperationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4352063B0E400A48904 /* OperationTask.swift */; };
 		B55F389AE43C135488386171 /* Pods_VDD_Network_Layers_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */; };
+		E0EF892220680F9B002F2236 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF892120680F9B002F2236 /* RequestError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		955AF4342063B0E400A48904 /* OperationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationProtocol.swift; sourceTree = "<group>"; };
 		955AF4352063B0E400A48904 /* OperationTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationTask.swift; sourceTree = "<group>"; };
 		BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDD_Network_Layers_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0EF892120680F9B002F2236 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				955AF4232063B0E400A48904 /* ModelProtocol.swift */,
 				955AF4222063B0E400A48904 /* Birthday.swift */,
 				955AF4242063B0E400A48904 /* User.swift */,
+				E0EF892120680F9B002F2236 /* RequestError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,26 +123,26 @@
 		955AF4252063B0E400A48904 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				955AF4262063B0E400A48904 /* RequestAPI */,
-				955AF4282063B0E400A48904 /* RequestData */,
+				955AF4262063B0E400A48904 /* List */,
+				955AF4282063B0E400A48904 /* Requests */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
-		955AF4262063B0E400A48904 /* RequestAPI */ = {
+		955AF4262063B0E400A48904 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				955AF4272063B0E400A48904 /* LoginAPI.swift */,
 			);
-			path = RequestAPI;
+			path = List;
 			sourceTree = "<group>";
 		};
-		955AF4282063B0E400A48904 /* RequestData */ = {
+		955AF4282063B0E400A48904 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
 				955AF4292063B0E400A48904 /* UserRequests.swift */,
 			);
-			path = RequestData;
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		955AF42A2063B0E400A48904 /* Network */ = {
@@ -340,6 +343,7 @@
 				955AF4102063B05A00A48904 /* AppDelegate.swift in Sources */,
 				955AF43B2063B0E400A48904 /* APIConstants.swift in Sources */,
 				955AF4382063B0E400A48904 /* User.swift in Sources */,
+				E0EF892220680F9B002F2236 /* RequestError.swift in Sources */,
 				955AF4392063B0E400A48904 /* LoginAPI.swift in Sources */,
 				955AF43D2063B0E400A48904 /* DispatcherProtocol.swift in Sources */,
 				955AF4362063B0E400A48904 /* Birthday.swift in Sources */,
