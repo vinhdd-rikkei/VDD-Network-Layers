@@ -25,6 +25,9 @@
 		955AF4402063B0E400A48904 /* OperationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4342063B0E400A48904 /* OperationProtocol.swift */; };
 		955AF4412063B0E400A48904 /* OperationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4352063B0E400A48904 /* OperationTask.swift */; };
 		B55F389AE43C135488386171 /* Pods_VDD_Network_Layers_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */; };
+		E044DF2C206945A300CA9094 /* FemaleRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E044DF2B206945A300CA9094 /* FemaleRequests.swift */; };
+		E044DF2E206945FA00CA9094 /* FemaleListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E044DF2D206945FA00CA9094 /* FemaleListAPI.swift */; };
+		E044DF302069463E00CA9094 /* Female.swift in Sources */ = {isa = PBXBuildFile; fileRef = E044DF2F2069463E00CA9094 /* Female.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		955AF4342063B0E400A48904 /* OperationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationProtocol.swift; sourceTree = "<group>"; };
 		955AF4352063B0E400A48904 /* OperationTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationTask.swift; sourceTree = "<group>"; };
 		BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDD_Network_Layers_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E044DF2B206945A300CA9094 /* FemaleRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FemaleRequests.swift; sourceTree = "<group>"; };
+		E044DF2D206945FA00CA9094 /* FemaleListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FemaleListAPI.swift; sourceTree = "<group>"; };
+		E044DF2F2069463E00CA9094 /* Female.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Female.swift; sourceTree = "<group>"; };
 		F43B6818B6E7E407DE434D16 /* Pods-VDD_Network_Layers_Example.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.staging.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +123,7 @@
 				955AF4232063B0E400A48904 /* ModelProtocol.swift */,
 				955AF4222063B0E400A48904 /* Birthday.swift */,
 				955AF4242063B0E400A48904 /* User.swift */,
+				E044DF2F2069463E00CA9094 /* Female.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				955AF4272063B0E400A48904 /* LoginAPI.swift */,
+				E044DF2D206945FA00CA9094 /* FemaleListAPI.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				955AF4292063B0E400A48904 /* UserRequests.swift */,
+				E044DF2B206945A300CA9094 /* FemaleRequests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -340,7 +349,10 @@
 				955AF43F2063B0E400A48904 /* NetworkEnviroment.swift in Sources */,
 				955AF43E2063B0E400A48904 /* NetworkDispatcher.swift in Sources */,
 				955AF4412063B0E400A48904 /* OperationTask.swift in Sources */,
+				E044DF2C206945A300CA9094 /* FemaleRequests.swift in Sources */,
 				955AF4372063B0E400A48904 /* ModelProtocol.swift in Sources */,
+				E044DF2E206945FA00CA9094 /* FemaleListAPI.swift in Sources */,
+				E044DF302069463E00CA9094 /* Female.swift in Sources */,
 				955AF4102063B05A00A48904 /* AppDelegate.swift in Sources */,
 				955AF43B2063B0E400A48904 /* APIConstants.swift in Sources */,
 				955AF4382063B0E400A48904 /* User.swift in Sources */,

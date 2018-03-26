@@ -23,24 +23,38 @@ class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
     init() { }
     
     // MARK: - Executing functions
-    func execute(with dispatcher: DispatcherProtocol? = nil, retry: Int? = 1) -> Promise<RequestDataResponse> {
+    func execute(with dispatcher: DispatcherProtocol? = nil,
+                 retry: Int? = 5,
+                 responseQueue: DispatchQueue? = .main,
+                 success: ((_ result: Output) -> Void)? = nil,
+                 apiError: ((_ error: APIResponseError) -> Void)? = nil,
+                 requestError: ((_ error: Error) -> Void)? = nil) {
         let finalDispatcher = dispatcher ?? NetworkDispatcher.shared
-        return Promise<RequestDataResponse>({ resolve, reject, status in
-            if let request = self.request {
-                do {
-                    try finalDispatcher.execute(request: request, retry: retry).then({ response in
-                        let data = self.parse(response: response)
-                        resolve(RequestDataResponse(data.output, data.error))
-                    }).catch { error in
-                        reject(error)
-                    }
-                } catch {
-                    reject(error)
-                }
-            } else {
-                reject(NetworkErrors.badInput)
+        func handleResponse(body: @escaping () -> Void) {
+            (responseQueue ?? .main).async {
+                body()
             }
-        })
+        }
+        if let request = self.request {
+            do {
+                try finalDispatcher.execute(request: request, retry: retry).then({ response in
+                    let data = self.parse(response: response)
+                    handleResponse {
+                        if let result = data.output {
+                            success?(result)
+                        } else if let error = data.error {
+                            apiError?(error)
+                        }
+                    }
+                }).catch { error in
+                    handleResponse { requestError?(error) }
+                }
+            } catch {
+                handleResponse { requestError?(error) }
+            }
+        } else {
+            handleResponse { requestError?(NetworkErrors.badInput) }
+        }
     }
     
     func cancel(with dispatcher: DispatcherProtocol? = nil) {
