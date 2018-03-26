@@ -14,5 +14,5 @@ protocol OperationProtocol {
     associatedtype Output
     
     // Request
-    var request: Request! { get }
+    var request: Request? { get }
 }

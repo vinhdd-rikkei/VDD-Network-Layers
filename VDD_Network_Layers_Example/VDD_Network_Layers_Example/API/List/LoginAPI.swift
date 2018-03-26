@@ -25,11 +25,17 @@ class LoginAPI: OperationTask<LoginResponse> {
 }
 
 class LoginResponse: ModelResponseProtocol {
-    var count: Int?
+    var isSuccess: Bool = false
     var user: User?
     
     required init(json: JSON) {
         // Parse json data to local variables
+        isSuccess = json["isSuccess"].boolValue
+        user = User.init(json: json["member"])
     }
     
+    func printInfo() {
+        print("=> [LoginResponse] Is success: \(isSuccess)")
+        user?.printInformation()
+    }
 }

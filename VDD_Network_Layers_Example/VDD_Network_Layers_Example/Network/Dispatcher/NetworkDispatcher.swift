@@ -24,19 +24,21 @@ class NetworkDispatcher: DispatcherProtocol {
         self.enviroment = enviroment
     }
     
-    func execute(request: Request, retry: Int? = 0) throws -> Promise<Response> {
-        // Cancel previous task
-        cancel()
+    func execute(request: Request, retry: Int? = 1) throws -> Promise<Response> {
         // Execute the request
         let content = prepareContentFor(request: request)
-        let op = Promise<Response>.init(in: .background, { resolve, _ , _ in
+        let op = Promise<Response>.init(in: .background, { resolve, reject , _ in
             self.task = Alamofire.request(content.fullUrl,
                                           method: content.method,
                                           parameters: content.parameters,
                                           encoding: content.encoding,
                                           headers: content.httpHeaders).responseJSON(completionHandler: { data in
-                let response = Response(data, for: request)
-                resolve(response)
+                if let error = data.result.error {
+                    reject(error)
+                } else {
+                    let response = Response(data, for: request)
+                    resolve(response)
+                }
             })
         })
         guard let retryAttempts = retry else { return op }
@@ -70,6 +72,7 @@ class NetworkDispatcher: DispatcherProtocol {
         print(" - Method: \(method)")
         print(" - HTTP Headers:\n   \(httpHeaders)")
         print(" - Parameters:\n   \(parameters ?? [:])")
+        print(" - Encoding:\n   \(encoding)")
         print("===================================================\n")
         return (fullUrl: fullUrl, method: method, httpHeaders: httpHeaders, parameters: parameters, encoding: encoding)
     }

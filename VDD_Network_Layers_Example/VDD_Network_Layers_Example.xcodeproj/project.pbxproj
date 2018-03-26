@@ -25,12 +25,12 @@
 		955AF4402063B0E400A48904 /* OperationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4342063B0E400A48904 /* OperationProtocol.swift */; };
 		955AF4412063B0E400A48904 /* OperationTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955AF4352063B0E400A48904 /* OperationTask.swift */; };
 		B55F389AE43C135488386171 /* Pods_VDD_Network_Layers_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */; };
-		E0EF892220680F9B002F2236 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EF892120680F9B002F2236 /* RequestError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		337123F52424B1B494133710 /* Pods-VDD_Network_Layers_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.release.xcconfig"; sourceTree = "<group>"; };
 		7A295142ABCE85F48FC70ACD /* Pods-VDD_Network_Layers_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		84E03F586364DE0CEA122AB3 /* Pods-VDD_Network_Layers_Example.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.appstore.xcconfig"; sourceTree = "<group>"; };
 		955AF40C2063B05A00A48904 /* VDD_Network_Layers_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDD_Network_Layers_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		955AF40F2063B05A00A48904 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		955AF4112063B05A00A48904 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		955AF4342063B0E400A48904 /* OperationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationProtocol.swift; sourceTree = "<group>"; };
 		955AF4352063B0E400A48904 /* OperationTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationTask.swift; sourceTree = "<group>"; };
 		BAF4591AB25900AE85B50F82 /* Pods_VDD_Network_Layers_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDD_Network_Layers_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0EF892120680F9B002F2236 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		F43B6818B6E7E407DE434D16 /* Pods-VDD_Network_Layers_Example.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.staging.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +71,8 @@
 			children = (
 				7A295142ABCE85F48FC70ACD /* Pods-VDD_Network_Layers_Example.debug.xcconfig */,
 				337123F52424B1B494133710 /* Pods-VDD_Network_Layers_Example.release.xcconfig */,
+				F43B6818B6E7E407DE434D16 /* Pods-VDD_Network_Layers_Example.staging.xcconfig */,
+				84E03F586364DE0CEA122AB3 /* Pods-VDD_Network_Layers_Example.appstore.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -115,7 +117,6 @@
 				955AF4232063B0E400A48904 /* ModelProtocol.swift */,
 				955AF4222063B0E400A48904 /* Birthday.swift */,
 				955AF4242063B0E400A48904 /* User.swift */,
-				E0EF892120680F9B002F2236 /* RequestError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				955AF42B2063B0E400A48904 /* Config */,
-				955AF42E2063B0E400A48904 /* Dispatcher */,
 				955AF4312063B0E400A48904 /* Enviroment */,
+				955AF42E2063B0E400A48904 /* Dispatcher */,
 				955AF4332063B0E400A48904 /* Operation */,
 			);
 			path = Network;
@@ -343,7 +344,6 @@
 				955AF4102063B05A00A48904 /* AppDelegate.swift in Sources */,
 				955AF43B2063B0E400A48904 /* APIConstants.swift in Sources */,
 				955AF4382063B0E400A48904 /* User.swift in Sources */,
-				E0EF892220680F9B002F2236 /* RequestError.swift in Sources */,
 				955AF4392063B0E400A48904 /* LoginAPI.swift in Sources */,
 				955AF43D2063B0E400A48904 /* DispatcherProtocol.swift in Sources */,
 				955AF4362063B0E400A48904 /* Birthday.swift in Sources */,
@@ -500,7 +500,7 @@
 		};
 		955AF4202063B05A00A48904 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 337123F52424B1B494133710 /* Pods-VDD_Network_Layers_Example.release.xcconfig */;
+			baseConfigurationReference = 84E03F586364DE0CEA122AB3 /* Pods-VDD_Network_Layers_Example.appstore.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "Network Layers";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -577,7 +577,7 @@
 		};
 		955AF4432063B12C00A48904 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A295142ABCE85F48FC70ACD /* Pods-VDD_Network_Layers_Example.debug.xcconfig */;
+			baseConfigurationReference = F43B6818B6E7E407DE434D16 /* Pods-VDD_Network_Layers_Example.staging.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "STAGING Network Layers";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

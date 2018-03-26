@@ -15,7 +15,7 @@ public enum UserRequests: Request {
     public var path: String {
         switch self {
         case .getMemberInfo(_,_):
-            return "<PATH_TO_GET_MEMBER_INFORMATION>"
+            return "<...>"
         }
     }
     
