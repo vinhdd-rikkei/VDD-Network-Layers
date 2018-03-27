@@ -77,54 +77,51 @@ class NetworkDispatcher: DispatcherProtocol {
         return (fullUrl: fullUrl, method: method, httpHeaders: httpHeaders, parameters: parameters, encoding: encoding)
     }
     
-//    func prepareFor(request: Request) throws -> URLRequest {
-//        let fullUrl = enviroment.host + "/" + request.path
-//        var urlRequest = try URLRequest(url: fullUrl, method: request.method)
-//
-//        // Analyzing parameters
-//        switch request.parameters {
-//        case .body(let params):
-//            if let params = params {
-//                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
-//            } else {
-//                throw NetworkErrors.badInput
-//            }
-//        case .url(let params):
-//            if let params = params as? [String: String] {
-//                let queryParams = params.map({ (element) -> URLQueryItem in
-//                    return URLQueryItem(name: element.key, value: element.value)
-//                })
-//                guard var components = URLComponents(string: fullUrl) else {
-//                    throw NetworkErrors.badInput
-//                }
-//                components.queryItems = queryParams
-//                urlRequest.url = components.url
-//            } else {
-//                throw NetworkErrors.badInput
-//            }
-//        }
-//
-//        // Add HTTP headers to url request
-//        enviroment.headers.forEach {
-//            if let value = $0.value as? String {
-//                urlRequest.addValue(value, forHTTPHeaderField: $0.key)
-//            }
-//        }
-//        request.headers?.forEach {
-//            if let value = $0.value as? String {
-//                urlRequest.addValue(value, forHTTPHeaderField: $0.key)
-//            }
-//        }
-//
-//        print("[ REQUEST INFORMATION ] ==========================")
-//        print(" - Full url: \(urlRequest.url?.absoluteString ?? "-")")
-//        print(" - Method: \(urlRequest.httpMethod ?? "-")")
-//        print(" - HTTP Headers: \(urlRequest.allHTTPHeaderFields ?? [:])")
-//        do {
-//            let data = urlRequest.httpBody ?? Data()
-//            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-//            print(" - Parameters: \(jsonObject)")
-//        } catch { }
-//        return urlRequest
-//    }
+    func prepareUrlRequestFor(request: Request) throws -> URLRequest {
+        let fullUrl = enviroment.host + "/" + request.path
+        var urlRequest = try URLRequest(url: fullUrl, method: request.method)
+
+        // Analyzing parameters
+        switch request.parameters {
+        case .body(let params):
+            if let params = params {
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+            } else {
+                throw NetworkErrors.badInput
+            }
+        case .url(let params):
+            if let params = params as? [String: String] {
+                let queryParams = params.map({ (element) -> URLQueryItem in
+                    return URLQueryItem(name: element.key, value: element.value)
+                })
+                guard var components = URLComponents(string: fullUrl) else {
+                    throw NetworkErrors.badInput
+                }
+                components.queryItems = queryParams
+                urlRequest.url = components.url
+            } else {
+                throw NetworkErrors.badInput
+            }
+        }
+
+        // Add HTTP headers to url request
+        enviroment.headers.forEach {
+            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
+        }
+        request.headers?.forEach {
+            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
+        }
+
+        print("============= [ REQUEST INFORMATION ] =============")
+        print(" - Full url: \(urlRequest.url?.absoluteString ?? "-")")
+        print(" - Method: \(urlRequest.httpMethod ?? "-")")
+        print(" - HTTP Headers:\n   \(urlRequest.allHTTPHeaderFields ?? [:])")
+        do {
+            let data = urlRequest.httpBody ?? Data()
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            print(" - Parameters:\n   \(jsonObject)")
+        } catch { }
+        print("===================================================\n")
+        return urlRequest
+    }
 }
