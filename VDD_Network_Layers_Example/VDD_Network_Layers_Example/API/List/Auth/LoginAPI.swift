@@ -24,18 +24,14 @@ class LoginAPI: OperationTask<LoginResponse> {
     }
 }
 
-class LoginResponse: ModelResponseProtocol {
+class LoginResponse: BaseAPIResponse {
     var isSuccess: Bool = false
     var user: User?
     
-    required init(json: JSON) {
+    required init(json: JSON, request: Request) {
+        super.init(json: json, request: request)
         // Parse json data to local variables
         isSuccess = json["isSuccess"].boolValue
         user = User.init(json: json["member"])
-    }
-    
-    func printInfo() {
-        print("=> [LoginResponse] Is success: \(isSuccess)")
-        user?.printInformation()
     }
 }

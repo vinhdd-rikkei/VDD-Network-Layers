@@ -12,6 +12,13 @@ import Alamofire
 public enum UserRequests: Request {
     case getMemberInfo(id: String, pass: String)
     
+    public var apiIdentifier: String {
+        switch self {
+        case .getMemberInfo:
+            return "API0002 ⬩ Get member info"
+        }
+    }
+    
     public var path: String {
         switch self {
         case .getMemberInfo(_,_):

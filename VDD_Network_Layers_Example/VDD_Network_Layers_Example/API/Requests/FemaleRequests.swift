@@ -12,6 +12,13 @@ import Alamofire
 public enum FemaleRequests: Request {
     case getPerformerList(id: String, pass: String)
     
+    public var apiIdentifier: String {
+        switch self {
+        case .getPerformerList:
+            return "API0001 ⬩ Get performer list"
+        }
+    }
+    
     public var path: String {
         switch self {
         case .getPerformerList(_,_):

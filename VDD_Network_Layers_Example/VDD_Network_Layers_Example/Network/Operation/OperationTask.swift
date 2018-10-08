@@ -12,57 +12,150 @@ import SwiftyJSON
 
 class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
     
-    // MARK: - Variables
+    // MARK: - Typealias
     typealias Output = T
-    typealias RequestDataResponse = (output: Output?, error: APIResponseError?)
+    typealias DataResponseSuccess = (_ result: Output) -> Void
+    typealias DataResponseApiError = (_ error: APIError) -> Void
+    typealias DataResponseRequestError = (_ error: Error) -> Void
     
-    var request: Request? {
-        return self.request
+    // MARK: - Constants
+    struct ExecuteData {
+        var enviroment: NetworkEnviroment = .default
+        var responseQueue: DispatchQueue = .main
+        var showIndicator: Bool = true
+        var autoShowAlertForApiErrors = true
+        var autoShowAlertForRequestErrors = true
+        var success: DataResponseSuccess? = nil
+        var apiError: DataResponseApiError? = nil
+        var requestError: DataResponseRequestError? = nil
+        
+        init() { }
     }
     
+    // MARK: - Variables
+    private var executeData = ExecuteData()
+    
+    private var requestErrorFixedMessage: String?
+    
+    final var code: String {
+        return request?.apiIdentifier ?? "--"
+    }
+    
+    var request: Request? {
+        return nil
+    }
+    
+    // MARK: - Init
     init() { }
     
+    // MARK: - Builder
+    @discardableResult
+    func set(enviroment: NetworkEnviroment) -> OperationTask<Output> {
+        executeData.enviroment = enviroment
+        return self
+    }
+    
+    @discardableResult
+    func set(responseQueue: DispatchQueue) -> OperationTask<Output> {
+        executeData.responseQueue = responseQueue
+        return self
+    }
+    
+    @discardableResult
+    func set(silentLoad: Bool) -> OperationTask<Output> {
+        executeData.showIndicator = !silentLoad
+        executeData.autoShowAlertForApiErrors = !silentLoad
+        executeData.autoShowAlertForRequestErrors = !silentLoad
+        return self
+    }
+    
+    @discardableResult
+    func showIndicator(_ show: Bool) -> OperationTask<Output> {
+        executeData.showIndicator = show
+        return self
+    }
+    
+    @discardableResult
+    func autoShowApiErrorAlert(_ show: Bool) -> OperationTask<Output> {
+        executeData.autoShowAlertForApiErrors = show
+        return self
+    }
+    
+    @discardableResult
+    func autoShowRequestErrorAlert(_ show: Bool, fixedMessage: String? = nil) -> OperationTask<Output> {
+        executeData.autoShowAlertForRequestErrors = show
+        requestErrorFixedMessage = fixedMessage
+        return self
+    }
+    
     // MARK: - Executing functions
-    func execute(with dispatcher: DispatcherProtocol? = nil,
-                 retry: Int? = 5,
-                 responseQueue: DispatchQueue? = .main,
-                 success: ((_ result: Output) -> Void)? = nil,
-                 apiError: ((_ error: APIResponseError) -> Void)? = nil,
-                 requestError: ((_ error: Error) -> Void)? = nil) {
-        let finalDispatcher = dispatcher ?? NetworkDispatcher.shared
-        func handleResponse(body: @escaping () -> Void) {
-            (responseQueue ?? .main).async {
+    func execute(success: DataResponseSuccess? = nil,
+                 apiError: DataResponseApiError? = nil,
+                 requestError: DataResponseRequestError? = nil) {
+        func run(queue: DispatchQueue?, body: @escaping () -> Void) {
+            (queue ?? .main).async {
                 body()
             }
         }
+        executeData.success = success
+        executeData.apiError = apiError
+        executeData.requestError = requestError
+        //        guard NetworkSupporter.hasInternet() else {
+        //            callbackRequestError(error: NetworkErrors.noInternet)
+        //            return
+        //        }
+        let dispatcher = NetworkDispatcher(enviroment: executeData.enviroment)
+        let retry = executeData.enviroment.retryTime
+        let showIndicator = executeData.showIndicator
+        let responseQueue = executeData.responseQueue
         if let request = self.request {
             do {
-                try finalDispatcher.execute(request: request, retry: retry).then({ response in
-                    let data = self.parse(response: response)
-                    handleResponse {
-                        if let result = data.output {
-                            success?(result)
-                        } else if let error = data.error {
-                            apiError?(error)
+                if showIndicator {
+                    run(queue: responseQueue) { IndicatorViewer.show() }
+                }
+                try dispatcher.execute(request: request, retry: retry).then({ response in
+                    self.parse(response: response, completion: { [weak self] output, error in
+                        run(queue: responseQueue) {
+                            if showIndicator {
+                                IndicatorViewer.hide()
+                            }
+                            if let output = output {
+                                self?.callbackSuccessError(output: output)
+                            } else if let error = error {
+                                self?.callbackApiError(error: error)
+                            } else {
+                                self?.callbackRequestError(error: NetworkErrors.badOutput)
+                            }
                         }
-                    }
+                    })
                 }).catch { error in
-                    handleResponse { requestError?(error) }
+                    run(queue: responseQueue) {
+                        if showIndicator {
+                            IndicatorViewer.hide()
+                        }
+                        self.callbackRequestError(error: error)
+                    }
                 }
             } catch {
-                handleResponse { requestError?(error) }
+                run(queue: responseQueue) {
+                    if showIndicator {
+                        IndicatorViewer.hide()
+                    }
+                    self.callbackRequestError(error: error)
+                }
             }
         } else {
-            handleResponse { requestError?(NetworkErrors.badInput) }
+            run(queue: responseQueue) {
+                self.callbackRequestError(error: NetworkErrors.badInput)
+            }
         }
     }
     
     func cancel(with dispatcher: DispatcherProtocol? = nil) {
-        let finalDispatcher = dispatcher ?? NetworkDispatcher.shared
-        finalDispatcher.cancel()
+        (dispatcher ?? NetworkDispatcher.shared).cancel()
     }
     
-    private func parse(response: Response) -> (output: T?, error: APIResponseError?) {
+    private func parse(response: Response, completion: @escaping ((_ output: T?, _ error: APIError?) -> Void)) {
         var getJson: JSON?
         switch response {
         case .json(let json):
@@ -72,22 +165,57 @@ class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
                 let json = try JSON.init(data: data)
                 getJson = json
             } catch {
-                return (output: nil, error: APIResponseError(error: error))
+                completion(nil, APIError(exceptionError: error))
             }
         case .error(_, let error):
-            if let error = error {
-                return (output: nil, error: APIResponseError(error: error))
-            }
-            return (output: nil, error: nil)
+            completion(nil, APIError(exceptionError: error))
         }
-        if let json = getJson {
-            if let error = APIResponseError.tryToParseError(from: json) {
-                return (output: nil, error: error)
+        
+        guard let json = getJson else {
+            completion(nil, APIError(exceptionError: NetworkErrors.badOutput))
+            return
+        }
+        
+        guard let error = APIError.tryToParseError(from: json) else {
+            if let request = self.request {
+                completion(T(json: json, request: request), nil)
             } else {
-                return (output: T(json: json), error: nil)
+                completion(nil, APIError(exceptionError: NetworkErrors.badOutput))
             }
-        } else {
-            return (output: nil, error: APIResponseError(error: NetworkErrors.badOutput))
+            return
         }
+        completion(nil, error)
+    }
+    
+    private func callbackSuccessError(output: T) {
+        output.printInfo()
+        executeData.success?(output)
+    }
+    
+    private func callbackApiError(error: APIError) {
+        if executeData.autoShowAlertForApiErrors {
+            showAlertFor(apiError: error)
+        }
+        executeData.apiError?(error)
+    }
+    
+    private func callbackRequestError(error: Error) {
+        if executeData.autoShowAlertForRequestErrors {
+            if error.isInternetOffline() {
+                // Show offline alert
+            } else {
+                showAlertFor(requestError: error)
+            }
+        }
+        executeData.requestError?(error)
+    }
+    
+    // MARK: - Alerts
+    private func showAlertFor(apiError: APIError) {
+        // Show alert for api error
+    }
+    
+    private func showAlertFor(requestError: Error) {
+        // Show alert for request error
     }
 }

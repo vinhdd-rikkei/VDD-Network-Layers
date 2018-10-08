@@ -1,5 +1,5 @@
 //
-//  APIConstants.swift
+//  NetworkEnviroment.swift
 //  TestNetworkLayers
 //
 //  Created by vinhdd on 3/21/18.
@@ -8,28 +8,33 @@
 
 import UIKit
 import Alamofire
+// swiftlint:disable colon
 
 class APIConstants {
     static var baseUrl: String {
-        #if DEBUG
-            print("[ DEBUG ENVIROMENT ] API: ...\n")
-            return ""
-        #elseif STAGING
-            print("[ STAGING ENVIROMENT ] API: ...\n")
-            return ""
+        #if DEVELOP || STAGING
+        return "http://172.16.18.91:8888/makodo/api/v1"
         #else
-            print("[ APPSTORE ENVIROMENT ] API: ...\n")
-            return ""
+        return "http://e0ff0242.ngrok.io/makodo/api/v1"
         #endif
     }
     
     static var httpHeaders: HTTPHeaders {
-        #if DEBUG
-            return ["Content-Type": "application/x-www-form-urlencoded"]
-        #elseif STAGING
-            return ["Content-Type": "application/x-www-form-urlencoded"]
+        #if DEVELOP || STAGING
+        return [:]
         #else
-            return ["Content-Type": "application/x-www-form-urlencoded"]
+        return [:]
         #endif
     }
+}
+
+// Describe common format for api response's content
+extension APIConstants {
+    static let dateFormat = "yyyy/MM/dd"
+    static let dateTimeFormat = "yyyy/MM/dd HH:mm:ss"
+    static let dateTimeWithoutSecondFormat = "yyyy/MM/dd HH:mm"
+    static let birthdayDateFormat = "yyyy/MM"
+    static let timeFormat = "HH:mm"
+    static let timeSecondFormat = "hh:mm:ss.SSS"
+    static let dateHourTimeFormat = "yyyy/MM/dd HH:mm:ss"
 }

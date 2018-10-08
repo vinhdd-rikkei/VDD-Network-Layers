@@ -1,5 +1,5 @@
 //
-//  NetworkConfig.swift
+//  NetworkEnviroment.swift
 //  TestNetworkLayers
 //
 //  Created by vinhdd on 3/21/18.
@@ -28,13 +28,14 @@ public enum RequestParams {
 
 // Define a list of error cases of response data
 public enum NetworkErrors: Error {
-    case badInput
-    case badOutput
-    case noData
+    case badInput // Parameters in wrong format,...
+    case badOutput // Get incorrect response data,...
+    case noData // No data found
 }
 
 // Request protocol
 public protocol Request {
+    var apiIdentifier: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: RequestParams { get }
