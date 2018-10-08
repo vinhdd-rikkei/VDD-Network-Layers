@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_VDD_Network_Layers_ExampleVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_VDD_Network_Layers_ExampleVersionString[];
+FOUNDATION_EXPORT double Pods_AppStoreVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_AppStoreVersionString[];
 

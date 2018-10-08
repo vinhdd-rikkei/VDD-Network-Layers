@@ -13,6 +13,9 @@ protocol OperationProtocol {
     // Define Output type that should returns
     associatedtype Output
     
+    // APi code
+    var code: String { get }
+    
     // Request
     var request: Request? { get }
 }

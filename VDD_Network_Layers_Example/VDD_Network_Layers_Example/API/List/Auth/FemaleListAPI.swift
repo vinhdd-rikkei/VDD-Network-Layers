@@ -24,7 +24,7 @@ class FemaleListAPI: OperationTask<FemaleListResponse> {
     }
 }
 
-class FemaleListResponse: ModelResponseProtocol {
+class FemaleListResponse: BaseAPIResponse {
     var isSuccess: Bool = false
     var isMemberContentsFullMode: Bool = false
     var onlineFemales: [Female]?
@@ -34,7 +34,8 @@ class FemaleListResponse: ModelResponseProtocol {
         return (onlineFemales ?? []) + (offlineFemales ?? [])
     }
     
-    required init(json: JSON) {
+    required init(json: JSON, request: Request) {
+        super.init(json: json, request: request)
         // Parse json data to local variables
         isSuccess = json["isSuccess"].boolValue
         isMemberContentsFullMode = json["isMemberContentsFullMode"].boolValue
@@ -50,12 +51,5 @@ class FemaleListResponse: ModelResponseProtocol {
                 offlineFemales?.append(Female(json: $0))
             }
         }
-    }
-    
-    func printInfo() {
-        print("=> [PerformerListResponse] Is success: \(isSuccess)")
-        print("=> Online list count: \((onlineFemales ?? []).count)")
-        print("=> Offline list count: \((offlineFemales ?? []).count)")
-        print("=> Total amount: \(allFemales.count)")
     }
 }

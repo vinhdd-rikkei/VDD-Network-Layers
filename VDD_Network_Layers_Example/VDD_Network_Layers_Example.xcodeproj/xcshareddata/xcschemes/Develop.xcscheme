@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0F6FD1A216B958B00F104BE"
-               BuildableName = "AppStore.app"
-               BlueprintName = "AppStore"
+               BlueprintIdentifier = "955AF40B2063B05A00A48904"
+               BuildableName = "Develop.app"
+               BlueprintName = "Develop"
                ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E0F6FD1A216B958B00F104BE"
-            BuildableName = "AppStore.app"
-            BlueprintName = "AppStore"
+            BlueprintIdentifier = "955AF40B2063B05A00A48904"
+            BuildableName = "Develop.app"
+            BlueprintName = "Develop"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E0F6FD1A216B958B00F104BE"
-            BuildableName = "AppStore.app"
-            BlueprintName = "AppStore"
+            BlueprintIdentifier = "955AF40B2063B05A00A48904"
+            BuildableName = "Develop.app"
+            BlueprintName = "Develop"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E0F6FD1A216B958B00F104BE"
-            BuildableName = "AppStore.app"
-            BlueprintName = "AppStore"
+            BlueprintIdentifier = "955AF40B2063B05A00A48904"
+            BuildableName = "Develop.app"
+            BlueprintName = "Develop"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -12,7 +12,7 @@ import Alamofire
 
 class NetworkDispatcher: DispatcherProtocol {
     // Singleton variable for using default network enviroment
-    static var shared = NetworkDispatcher()
+    static var shared = NetworkDispatcher(enviroment: NetworkEnviroment.default)
     
     // Request API task
     private var task: DataRequest?
@@ -20,19 +20,15 @@ class NetworkDispatcher: DispatcherProtocol {
     // Network enviroment for executing
     private var enviroment: NetworkEnviroment
     
-    required init(enviroment: NetworkEnviroment = NetworkEnviroment.shared) {
+    required init(enviroment: NetworkEnviroment) {
         self.enviroment = enviroment
     }
     
-    func execute(request: Request, retry: Int? = 1) throws -> Promise<Response> {
+    func execute(request: Request, retry: Int) throws -> Promise<Response> {
         // Execute the request
-        let content = prepareContentFor(request: request)
-        let op = Promise<Response>.init(in: .background, { resolve, reject , _ in
-            self.task = Alamofire.request(content.fullUrl,
-                                          method: content.method,
-                                          parameters: content.parameters,
-                                          encoding: content.encoding,
-                                          headers: content.httpHeaders).responseJSON(completionHandler: { data in
+        let urlRequest = prepareURLRequestFor(request: request)
+        let op = Promise<Response>.init(in: .background, { resolve, reject, _ in
+            self.task = Alamofire.request(urlRequest).responseJSON(completionHandler: { data in
                 if let error = data.result.error {
                     reject(error)
                 } else {
@@ -41,8 +37,7 @@ class NetworkDispatcher: DispatcherProtocol {
                 }
             })
         })
-        guard let retryAttempts = retry else { return op }
-        return op.retry(retryAttempts)
+        return op.retry(retry)
     }
     
     func cancel() {
@@ -50,78 +45,11 @@ class NetworkDispatcher: DispatcherProtocol {
         task = nil
     }
     
-    func prepareContentFor(request: Request) -> (fullUrl: String, method: HTTPMethod, httpHeaders: HTTPHeaders?, parameters: Parameters?, encoding: URLEncoding) {
-        let fullUrl = enviroment.host + "/" + request.path
-        let encoding = enviroment.encoding
-        let method = request.method
-        var httpHeaders: HTTPHeaders = enviroment.headers
-        if let requestHeader = request.headers {
-            requestHeader.forEach {
-                httpHeaders[$0.key] = $0.value
-            }
-        }
-        var parameters: Parameters?
-        switch request.parameters {
-        case .body(let params):
-            parameters = params
-        case .url(let params):
-            parameters = params
-        }
-        print("============= [ REQUEST INFORMATION ] =============")
-        print(" - Full url: \(fullUrl)")
-        print(" - Method: \(method)")
-        print(" - HTTP Headers:\n   \(httpHeaders)")
-        print(" - Parameters:\n   \(parameters ?? [:])")
-        print(" - Encoding:\n   \(encoding)")
-        print("===================================================\n")
-        return (fullUrl: fullUrl, method: method, httpHeaders: httpHeaders, parameters: parameters, encoding: encoding)
+    func prepareComponentsFor(request: Request) -> ComponentRequest {
+        return ComponentRequest(request: request, enviroment: enviroment)
     }
     
-    func prepareUrlRequestFor(request: Request) throws -> URLRequest {
-        let fullUrl = enviroment.host + "/" + request.path
-        var urlRequest = try URLRequest(url: fullUrl, method: request.method)
-
-        // Analyzing parameters
-        switch request.parameters {
-        case .body(let params):
-            if let params = params {
-                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
-            } else {
-                throw NetworkErrors.badInput
-            }
-        case .url(let params):
-            if let params = params as? [String: String] {
-                let queryParams = params.map({ (element) -> URLQueryItem in
-                    return URLQueryItem(name: element.key, value: element.value)
-                })
-                guard var components = URLComponents(string: fullUrl) else {
-                    throw NetworkErrors.badInput
-                }
-                components.queryItems = queryParams
-                urlRequest.url = components.url
-            } else {
-                throw NetworkErrors.badInput
-            }
-        }
-
-        // Add HTTP headers to url request
-        enviroment.headers.forEach {
-            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
-        }
-        request.headers?.forEach {
-            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
-        }
-
-        print("============= [ REQUEST INFORMATION ] =============")
-        print(" - Full url: \(urlRequest.url?.absoluteString ?? "-")")
-        print(" - Method: \(urlRequest.httpMethod ?? "-")")
-        print(" - HTTP Headers:\n   \(urlRequest.allHTTPHeaderFields ?? [:])")
-        do {
-            let data = urlRequest.httpBody ?? Data()
-            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-            print(" - Parameters:\n   \(jsonObject)")
-        } catch { }
-        print("===================================================\n")
-        return urlRequest
+    func prepareURLRequestFor(request: Request) -> URLRequestConvertible {
+        return ConvertibleRequest(request: request, enviroment: enviroment)
     }
 }

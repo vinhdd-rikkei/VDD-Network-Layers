@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0920"
+   LastUpgradeVersion = "1000"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,28 +14,27 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "955AF40B2063B05A00A48904"
-               BuildableName = "VDD_Network_Layers_Example.app"
-               BlueprintName = "VDD_Network_Layers_Example"
+               BlueprintIdentifier = "E0F6FCF6216B958500F104BE"
+               BuildableName = "Staging.app"
+               BlueprintName = "Staging"
                ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Staging"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "955AF40B2063B05A00A48904"
-            BuildableName = "VDD_Network_Layers_Example.app"
-            BlueprintName = "VDD_Network_Layers_Example"
+            BlueprintIdentifier = "E0F6FCF6216B958500F104BE"
+            BuildableName = "Staging.app"
+            BlueprintName = "Staging"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -43,10 +42,9 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Staging"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -57,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "955AF40B2063B05A00A48904"
-            BuildableName = "VDD_Network_Layers_Example.app"
-            BlueprintName = "VDD_Network_Layers_Example"
+            BlueprintIdentifier = "E0F6FCF6216B958500F104BE"
+            BuildableName = "Staging.app"
+            BlueprintName = "Staging"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -67,7 +65,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Staging"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -76,18 +74,18 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "955AF40B2063B05A00A48904"
-            BuildableName = "VDD_Network_Layers_Example.app"
-            BlueprintName = "VDD_Network_Layers_Example"
+            BlueprintIdentifier = "E0F6FCF6216B958500F104BE"
+            BuildableName = "Staging.app"
+            BlueprintName = "Staging"
             ReferencedContainer = "container:VDD_Network_Layers_Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Staging">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Staging"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
