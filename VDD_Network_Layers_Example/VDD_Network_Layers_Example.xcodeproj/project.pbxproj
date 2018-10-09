@@ -91,9 +91,9 @@
 		E0F6FD58216B969A00F104BE /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD57216B969A00F104BE /* ErrorExtension.swift */; };
 		E0F6FD59216B969A00F104BE /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD57216B969A00F104BE /* ErrorExtension.swift */; };
 		E0F6FD5A216B969A00F104BE /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD57216B969A00F104BE /* ErrorExtension.swift */; };
-		E0F6FD5C216B96D700F104BE /* IndicatorViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* IndicatorViewer.swift */; };
-		E0F6FD5D216B96D700F104BE /* IndicatorViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* IndicatorViewer.swift */; };
-		E0F6FD5E216B96D700F104BE /* IndicatorViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* IndicatorViewer.swift */; };
+		E0F6FD5C216B96D700F104BE /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* NetworkIndicator.swift */; };
+		E0F6FD5D216B96D700F104BE /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* NetworkIndicator.swift */; };
+		E0F6FD5E216B96D700F104BE /* NetworkIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F6FD5B216B96D700F104BE /* NetworkIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,7 +142,7 @@
 		E0F6FD42216B962B00F104BE /* APIServiceGeneral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServiceGeneral.swift; sourceTree = "<group>"; };
 		E0F6FD53216B968400F104BE /* NetworkConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConnectivity.swift; sourceTree = "<group>"; };
 		E0F6FD57216B969A00F104BE /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
-		E0F6FD5B216B96D700F104BE /* IndicatorViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorViewer.swift; sourceTree = "<group>"; };
+		E0F6FD5B216B96D700F104BE /* NetworkIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicator.swift; sourceTree = "<group>"; };
 		F43B6818B6E7E407DE434D16 /* Pods-VDD_Network_Layers_Example.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDD_Network_Layers_Example.staging.xcconfig"; path = "Pods/Target Support Files/Pods-VDD_Network_Layers_Example/Pods-VDD_Network_Layers_Example.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +192,14 @@
 				AEB505C4244ACD7EBEF602FC /* Pods-Staging.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		951EFA8B216C4748004A8C67 /* Female */ = {
+			isa = PBXGroup;
+			children = (
+				E044DF2D206945FA00CA9094 /* FemaleListAPI.swift */,
+			);
+			path = Female;
 			sourceTree = "<group>";
 		};
 		955AF4032063B05A00A48904 = {
@@ -257,6 +265,7 @@
 			children = (
 				E0D64766216B98A800596035 /* Base */,
 				E0D64767216B98AD00596035 /* Auth */,
+				951EFA8B216C4748004A8C67 /* Female */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -343,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				955AF4272063B0E400A48904 /* LoginAPI.swift */,
-				E044DF2D206945FA00CA9094 /* FemaleListAPI.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -352,8 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				E0F6FD53216B968400F104BE /* NetworkConnectivity.swift */,
+				E0F6FD5B216B96D700F104BE /* NetworkIndicator.swift */,
 				E0F6FD57216B969A00F104BE /* ErrorExtension.swift */,
-				E0F6FD5B216B96D700F104BE /* IndicatorViewer.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -681,7 +689,7 @@
 				955AF43A2063B0E400A48904 /* UserRequests.swift in Sources */,
 				955AF43F2063B0E400A48904 /* NetworkEnviroment.swift in Sources */,
 				955AF43E2063B0E400A48904 /* NetworkDispatcher.swift in Sources */,
-				E0F6FD5C216B96D700F104BE /* IndicatorViewer.swift in Sources */,
+				E0F6FD5C216B96D700F104BE /* NetworkIndicator.swift in Sources */,
 				E0F6FD4C216B962B00F104BE /* APIConstants.swift in Sources */,
 				955AF4412063B0E400A48904 /* OperationTask.swift in Sources */,
 				E044DF2C206945A300CA9094 /* FemaleRequests.swift in Sources */,
@@ -712,7 +720,7 @@
 				E0F6FCFC216B958500F104BE /* UserRequests.swift in Sources */,
 				E0F6FCFD216B958500F104BE /* NetworkEnviroment.swift in Sources */,
 				E0F6FCFE216B958500F104BE /* NetworkDispatcher.swift in Sources */,
-				E0F6FD5D216B96D700F104BE /* IndicatorViewer.swift in Sources */,
+				E0F6FD5D216B96D700F104BE /* NetworkIndicator.swift in Sources */,
 				E0F6FD4D216B962B00F104BE /* APIConstants.swift in Sources */,
 				E0F6FCFF216B958500F104BE /* OperationTask.swift in Sources */,
 				E0F6FD00216B958500F104BE /* FemaleRequests.swift in Sources */,
@@ -743,7 +751,7 @@
 				E0F6FD20216B958B00F104BE /* UserRequests.swift in Sources */,
 				E0F6FD21216B958B00F104BE /* NetworkEnviroment.swift in Sources */,
 				E0F6FD22216B958B00F104BE /* NetworkDispatcher.swift in Sources */,
-				E0F6FD5E216B96D700F104BE /* IndicatorViewer.swift in Sources */,
+				E0F6FD5E216B96D700F104BE /* NetworkIndicator.swift in Sources */,
 				E0F6FD4E216B962B00F104BE /* APIConstants.swift in Sources */,
 				E0F6FD23216B958B00F104BE /* OperationTask.swift in Sources */,
 				E0F6FD24216B958B00F104BE /* FemaleRequests.swift in Sources */,

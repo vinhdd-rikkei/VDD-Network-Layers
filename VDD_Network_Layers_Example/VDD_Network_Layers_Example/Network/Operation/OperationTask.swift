@@ -111,13 +111,13 @@ class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
         if let request = self.request {
             do {
                 if showIndicator {
-                    run(queue: responseQueue) { IndicatorViewer.show() }
+                    run(queue: responseQueue) { NetworkIndicator.show() }
                 }
                 try dispatcher.execute(request: request, retry: retry).then({ response in
                     self.parse(response: response, completion: { [weak self] output, error in
                         run(queue: responseQueue) {
                             if showIndicator {
-                                IndicatorViewer.hide()
+                                NetworkIndicator.hide()
                             }
                             if let output = output {
                                 self?.callbackSuccessError(output: output)
@@ -131,7 +131,7 @@ class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
                 }).catch { error in
                     run(queue: responseQueue) {
                         if showIndicator {
-                            IndicatorViewer.hide()
+                            NetworkIndicator.hide()
                         }
                         self.callbackRequestError(error: error)
                     }
@@ -139,7 +139,7 @@ class OperationTask<T: ModelResponseProtocol>: OperationProtocol {
             } catch {
                 run(queue: responseQueue) {
                     if showIndicator {
-                        IndicatorViewer.hide()
+                        NetworkIndicator.hide()
                     }
                     self.callbackRequestError(error: error)
                 }
